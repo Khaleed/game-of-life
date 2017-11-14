@@ -1,0 +1,15 @@
+.cell {
+    width: 10px;
+    height: 10px;
+    border: solid 1px #d3d3d3;
+    display: inline-block;
+    float: left;
+}
+
+.alive {
+    background-color: #333333;
+}
+
+.dead {
+    background-color: white;
+}
