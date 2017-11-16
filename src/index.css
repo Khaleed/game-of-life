@@ -1,7 +1,12 @@
+.grid {
+    width: 100px;
+    height: 100px;
+}
 .cell {
     width: 10px;
     height: 10px;
     border: solid 1px #d3d3d3;
+    box-sizing: border-box; /* make the border part of the cell */
     display: inline-block;
     float: left;
 }
