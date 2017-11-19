@@ -1,7 +1,10 @@
 .grid {
     width: 100px;
     height: 100px;
+    margin: auto;
+    margin-top: 20px;
 }
+
 .cell {
     width: 10px;
     height: 10px;
@@ -11,10 +14,28 @@
     float: left;
 }
 
+.cell:hover {
+    background: #00CCFF;
+}
+
 .alive {
     background-color: #333333;
 }
 
 .dead {
     background-color: white;
+}
+
+.center {
+    margin: auto;
+    display: table;
+    margin-top: 10px;
+}
+
+h1, h2 {
+    color: black;
+    margin: auto;
+    margin-top: 10px;
+    text-align: center;
+    width: 50%;
 }
