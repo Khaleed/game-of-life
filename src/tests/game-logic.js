@@ -22,23 +22,15 @@ const isAlive = (grid, m, n) => grid[m, n] ? 1 : 0;
 const colsInRow = (grid, m) => grid[m];
 
 // horizontal :: (Int, Int) -> Matrix
-const horizontal = (x, y) => {
-    return [[x, y - 1], [x, y + 1]];
-};
+const horizontal = (x, y) => [[x, y - 1], [x, y + 1]];
 
 // vertical :: (Matrix) -> Matrix
-const vertical = (x, y) => {
-    return [[x - 1, y], [x + 1, y]];
-};
+const vertical = (x, y) => [[x - 1, y], [x + 1, y]];
 
 // NorthWestDiagonal :: (Matrix) -> Matrix
-const NorthWestDiagonal = (x, y) => {
-    return [[x - 1, y - 1], [x + 1, y + 1]];
-};
+const NorthWestDiagonal = (x, y) => [[x - 1, y - 1], [x + 1, y + 1]];
 
 // NorthEastDiagonal :: (Matrix) -> Matrix
-const NorthEastDiagonal = (x, y) => {
-    return [[x - 1, y + 1], [x + 1, y - 1]];
-};
+const NorthEastDiagonal = (x, y) => [[x - 1, y + 1], [x + 1, y - 1]];
 
 export { matrix, isAlive, colsInRow, horizontal, vertical, NorthWestDiagonal, NorthEastDiagonal }
