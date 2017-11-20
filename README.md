@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
-This is an implementation of Conway's Game of Life
+This is an implementation of Conway's Game of Life. The goal is to learn the basics of React with a well-defined small game.
 
 ## License
 
