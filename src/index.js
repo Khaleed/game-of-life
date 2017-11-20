@@ -28,7 +28,7 @@ function Game() {
     const rows = range(10);
     const cols = 10;
     // refactor to take cols as arg instead of 10
-    const filler = () => Array(10).fill("null");
+    const filler = () => Array(10).fill(0);
     const matrix = map(filler);
     const initialGrid = matrix(rows);
     return (
