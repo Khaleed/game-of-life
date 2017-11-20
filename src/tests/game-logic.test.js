@@ -10,7 +10,8 @@ test('initialise a grid with default dead cells', () => {
 });
 
 test('check status of a cell', () => {
-    expect(isAlive(matrix, 3, 3)).toBeLessThan(2);
+    const grid = matrix(3, 3);
+    expect(isAlive(grid, 1, 1)).toBeLessThan(2);
 });
 
 test('get a row', () => {

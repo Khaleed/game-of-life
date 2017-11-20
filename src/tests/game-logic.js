@@ -16,7 +16,7 @@ const matrix = (m, n) => {
 };
 
 // isAlive :: (Matrix) -> Bool
-const isAlive = (grid, m, n) => grid[m, n] ? 1 : 0;
+const isAlive = (grid, m, n) => grid[m][n] ? 1 : 0;
 
 // colsInRow :: (Matrix) -> []
 const colsInRow = (grid, m) => grid[m];
