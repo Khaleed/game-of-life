@@ -10,8 +10,8 @@ import { range, map, reduce, filter, partial, compose } from "../helpers";
 // matrix :: ([], Int) -> Matrix
 const matrix = (m, n) => {
     const rows = range(m);
-    const innerArray = () => Array(n).fill(0);
-    const grid = map(innerArray);
+    const cols = () => Array(n).fill(0);
+    const grid = map(cols);
     return grid(rows);
 };
 
@@ -61,4 +61,6 @@ const threeNeighbours = (grid, m, n) => !isAlive(grid, m, n) && aliveNeighbours(
 //     // check if a living cell dies or lives or a dead cell that becomes alive on against four rules and if so return new grid
 // }));
 
-export { matrix, isAlive, horizontalPoints, verticalPoints, northWestDiagonalPoints, northEastDiagonalPoints, reproduce, isInside, neighbourhoodPoints, aliveNeighbours, lessThanTwoNeighbours, twoOrThreeNeighbours, moreThanThreeNeighbours, threeNeighbours }
+export { matrix, isAlive, horizontalPoints, verticalPoints, northWestDiagonalPoints,
+         northEastDiagonalPoints, reproduce, isInside, neighbourhoodPoints, aliveNeighbours,
+         lessThanTwoNeighbours, twoOrThreeNeighbours, moreThanThreeNeighbours, threeNeighbours }
