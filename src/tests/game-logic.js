@@ -37,7 +37,7 @@ const reproduce = (grid, m, n) => grid[m][n] ? 1 : 1;
 const isInside = (rows, cols, m, n) => (m < rows && m >=0) && (n < cols && n >= 0);
 
 // neighbourhoodPoints :: (Int, Int) -> Matrix
-const neighbourhoodPoints = (m, n) => horizontalPoints(m, n).concat(verticalPoints(m, n)).concat(northWestDiagonalPoints(m, n).concat(northEastDiagonalPoints(m, n)));
+const neighbourhoodPoints = (m, n) => horizontalPoints(m, n).concat(verticalPoints(m, n), northWestDiagonalPoints(m, n), northEastDiagonalPoints(m, n));
 
 // aliveNeighbours :: (Matrix, Int, Int) -> Int
 const aliveNeighbours = (grid, m, n) => neighbourhoodPoints(m, n).filter((cellPoint) => isInside(grid.length, grid[0].length, cellPoint[0], cellPoint[1])).reduce((acc, x) => isAlive(grid, x[0], x[1]) ? acc + 1 : acc, 0);
