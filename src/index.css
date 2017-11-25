@@ -26,6 +26,7 @@
     background-color: white;
 }
 
+/* helper to center content */
 .center {
     margin: auto;
     display: table;
