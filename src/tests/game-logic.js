@@ -9,28 +9,56 @@ import { range, map, reduce, filter, partial, compose } from "../helpers";
 
 // matrix :: ([], Int) -> Matrix
 const matrix = (m, n) => {
-    const rows = range(3);
+    const rows = range(m);
     const innerArray = () => Array(n).fill(0);
     const grid = map(innerArray);
     return grid(rows);
 };
 
-// isAlive :: (Matrix) -> Bool
+// isAlive :: (Matrix, Int, Int) -> Int
 const isAlive = (grid, m, n) => grid[m][n] ? 1 : 0;
 
-// colsInRow :: (Matrix) -> []
-const colsInRow = (grid, m) => grid[m];
+// horizontalPoints :: (Int, Int) -> Matrix
+const horizontalPoints = (m, n) => [[m, n - 1], [m, n + 1]];
 
-// horizontal :: (Int, Int) -> Matrix
-const horizontal = (x, y) => [[x, y - 1], [x, y + 1]];
+// verticalPoints :: (Int, Int) -> Matrix
+const verticalPoints = (m, n) => [[m - 1, n], [m + 1, n]];
 
-// vertical :: (Matrix) -> Matrix
-const vertical = (x, y) => [[x - 1, y], [x + 1, y]];
+// northWestDiagonalPoints :: (Int, Int) -> Matrix
+const northWestDiagonalPoints = (m, n) => [[m - 1, n - 1], [m + 1, n + 1]];
 
-// NorthWestDiagonal :: (Matrix) -> Matrix
-const NorthWestDiagonal = (x, y) => [[x - 1, y - 1], [x + 1, y + 1]];
+// northEastDiagonalPoints :: (Int, Int) -> Matrix
+const northEastDiagonalPoints = (m, n) => [[m - 1, n + 1], [m + 1, n - 1]];
 
-// NorthEastDiagonal :: (Matrix) -> Matrix
-const NorthEastDiagonal = (x, y) => [[x - 1, y + 1], [x + 1, y - 1]];
+// reproduce :: (Matrix, Int, Int) -> Int
+const reproduce = (grid, m, n) => grid[m][n] ? 1 : 1;
 
-export { matrix, isAlive, colsInRow, horizontal, vertical, NorthWestDiagonal, NorthEastDiagonal }
+// isInside :: (Int, Int, Int, Int) -> Bool
+const isInside = (rows, cols, m, n) => (m < rows && m >=0) && (n < cols && n >= 0);
+
+// neighbourhoodPoints :: (Int, Int) -> Matrix
+const neighbourhoodPoints = (m, n) => horizontalPoints(m, n).concat(verticalPoints(m, n)).concat(northWestDiagonalPoints(m, n).concat(northEastDiagonalPoints(m, n)));
+
+// aliveNeighbours :: (Matrix, Int, Int) -> Int
+const aliveNeighbours = (grid, m, n) => neighbourhoodPoints(m, n).filter((cellPoint) => isInside(grid.length, grid[0].length, cellPoint[0], cellPoint[1])).reduce((acc, x) => isAlive(grid, x[0], x[1]) ? acc + 1 : acc, 0);
+
+// lessThanTwoNeighbours :: (Matrix, Int, Int) -> Int
+const lessThanTwoNeighbours = (grid, m, n) => isAlive(grid, m, n) && aliveNeighbours(grid, m, n) < 2 ? 0 : 1;
+
+// twoOrThreeNeighbours :: (Matrix, Int, Int) -> Int
+const twoOrThreeNeighbours = (grid, m, n) => isAlive(grid, m, n) && [2, 3].includes(aliveNeighbours(grid, m, n)) ? 1 : 0;
+
+// moreThanThreeNeighbours :: (Matrix, Int, Int) -> Int
+const moreThanThreeNeighbours = (grid, m, n) => isAlive(grid, m, n) && aliveNeighbours(grid, m, n) > 3 ? 0 : grid[m][n];
+
+// threeNeighbours :: (Matrix, Int, Int) -> Int
+const threeNeighbours = (grid, m, n) => !isAlive(grid, m, n) && aliveNeighbours(grid, m, n) === 3 ? 1 : 0;
+
+// // nextGeneration :: (Matrix) -> Matrix
+// const nextGeneration = (grid) => grid.map((_, m) => grid[m].map((_, n) => {
+//     // cells on the grid
+//     const cell = [m, n];
+//     // check if a living cell dies or lives or a dead cell that becomes alive on against four rules and if so return new grid
+// }));
+
+export { matrix, isAlive, horizontalPoints, verticalPoints, northWestDiagonalPoints, northEastDiagonalPoints, reproduce, isInside, neighbourhoodPoints, aliveNeighbours, lessThanTwoNeighbours, twoOrThreeNeighbours, moreThanThreeNeighbours, threeNeighbours }
