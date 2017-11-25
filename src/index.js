@@ -1,47 +1,62 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { map, reduce, filter } from "./helpers";
-import { range } from "./helpers";
+import { map, reduce, filter, concat } from "./helpers";
+import { matrix } from "../src/tests/game-logic";
 
 // stateless child component 2
 function Cell(props) {
-    const className = "cell";
-    return (
-        <div className={ props.isAlive? className.concat(" alive") : className }
-             onClick= { props.onClick }>
+    const cellSelection = () => props.cellSelection(props.row, props.col);
+    return(
+        <div className= { props.cellClass }
+             id = { props.coordinate }
+             onClick = { cellSelection }
+        >
         </div>
-    )
+    );
 };
 
 // stateless child component 1
 function Grid(props) {
+    const cells = [];
+    props.grid.map((_, m) => props.grid[m].map((_, n) => {
+        const cellClass = "cell";
+        cells.concat(
+            <Cell
+            cellClass = { props.grid[m][n] ? cellClass.concat(" alive") : cellClass }
+            coordinate = { [m, n] }
+            row = { m }
+            col = { n }
+            cellSelection = { props.cellSelection }
+            />
+        );
+    }));
+
     return(
         <div className="grid">
+        { cells }
         </div>
-    )
+    );
 };
 
-// all state will be held in this top-level component
+// all state will be held in this top-level component and propagate to child components
 function Game() {
-    const generations = 0; // initial seed to create generations
-    const rows = range(10);
-    const cols = 10;
-    // refactor to take cols as arg instead of 10
-    const filler = () => Array(10).fill(0);
-    const matrix = map(filler);
-    const initialGrid = matrix(rows);
+    const generation = 0;
+    const rows = 3;
+    const cols = 3;
+    const initialGrid = matrix(rows, cols);
     return (
         <div className="game-of-life">
             <h1>Conway's Game of Life</h1>
             <Grid
-                rows = { rows.length }
+                rows = { rows }
                 cols = { cols }
-                initialGrid = { initialGrid }
+                grid = { initialGrid }
+                cellSelection = { cellSelection }
             />
-            <h2>Generation { generations } </h2>
+            <h2>Generations { generation } </h2>
         </div>
-    )
+    );
 };
 
 ReactDOM.render(
