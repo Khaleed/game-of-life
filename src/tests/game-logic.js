@@ -7,16 +7,8 @@ import { range, map, reduce, filter, partial, compose } from "../helpers";
     4) Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 */
 
-// matrix :: ([], Int) -> Matrix
-const matrix = (m, n) => {
-    const rows = range(m);
-    const cols = () => Array(n).fill(0);
-    const grid = map(cols);
-    return grid(rows);
-};
-
 // isAlive :: (Matrix, Int, Int) -> Int
-const isAlive = (grid, m, n) => grid[m][n] ? 1 : 0;
+const isAlive = (grid, m, n) => (grid[m][n] ? 1 : 0);
 
 // horizontalPoints :: (Int, Int) -> Matrix
 const horizontalPoints = (m, n) => [[m, n - 1], [m, n + 1]];
