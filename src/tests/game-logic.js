@@ -22,37 +22,79 @@ const northWestDiagonalPoints = (m, n) => [[m - 1, n - 1], [m + 1, n + 1]];
 // northEastDiagonalPoints :: (Int, Int) -> Matrix
 const northEastDiagonalPoints = (m, n) => [[m - 1, n + 1], [m + 1, n - 1]];
 
-// reproduce :: (Matrix, Int, Int) -> Int
-const reproduce = (grid, m, n) => grid[m][n] ? 1 : 1;
-
 // isInside :: (Int, Int, Int, Int) -> Bool
-const isInside = (rows, cols, m, n) => (m < rows && m >=0) && (n < cols && n >= 0);
+const isInside = (ms, ns, m, n) => m < ms && m >= 0 && (n < ns && n >= 0);
 
 // neighbourhoodPoints :: (Int, Int) -> Matrix
-const neighbourhoodPoints = (m, n) => horizontalPoints(m, n).concat(verticalPoints(m, n), northWestDiagonalPoints(m, n), northEastDiagonalPoints(m, n));
+const neighbourhoodPoints = (m, n) =>
+  horizontalPoints(m, n).concat(
+    verticalPoints(m, n),
+    northWestDiagonalPoints(m, n),
+    northEastDiagonalPoints(m, n)
+  );
+
+// neighboursWithin :: (Int, Int) -> Matrix
+const neighboursWithin = (grid, m, n) =>
+  neighbourhoodPoints(m, n).filter(cellCoordinate =>
+    isInside(grid.length, grid[0].length, cellCoordinate[0], cellCoordinate[1])
+  );
 
 // aliveNeighbours :: (Matrix, Int, Int) -> Int
-const aliveNeighbours = (grid, m, n) => neighbourhoodPoints(m, n).filter((cellPoint) => isInside(grid.length, grid[0].length, cellPoint[0], cellPoint[1])).reduce((acc, x) => isAlive(grid, x[0], x[1]) ? acc + 1 : acc, 0);
+const aliveNeighbours = (grid, m, n) =>
+  neighboursWithin(grid, m, n).reduce(
+    (acc, x) => (isAlive(grid, x[0], x[1]) ? acc + 1 : acc),
+    0
+  );
 
-// lessThanTwoNeighbours :: (Matrix, Int, Int) -> Int
-const lessThanTwoNeighbours = (grid, m, n) => isAlive(grid, m, n) && aliveNeighbours(grid, m, n) < 2 ? 0 : 1;
+// lessThanTwoNeighbours :: (Matrix, Int, Int) -> Bool
+const lessThanTwoNeighbours = (grid, m, n) =>
+  isAlive(grid, m, n) && aliveNeighbours(grid, m, n) < 2;
 
 // twoOrThreeNeighbours :: (Matrix, Int, Int) -> Int
-const twoOrThreeNeighbours = (grid, m, n) => isAlive(grid, m, n) && [2, 3].includes(aliveNeighbours(grid, m, n)) ? 1 : 0;
+const twoOrThreeNeighbours = (grid, m, n) =>
+  isAlive(grid, m, n) && [2, 3].includes(aliveNeighbours(grid, m, n));
 
 // moreThanThreeNeighbours :: (Matrix, Int, Int) -> Int
-const moreThanThreeNeighbours = (grid, m, n) => isAlive(grid, m, n) && aliveNeighbours(grid, m, n) > 3 ? 0 : grid[m][n];
+const moreThanThreeNeighbours = (grid, m, n) =>
+  isAlive(grid, m, n) && aliveNeighbours(grid, m, n) > 3;
 
 // threeNeighbours :: (Matrix, Int, Int) -> Int
-const threeNeighbours = (grid, m, n) => !isAlive(grid, m, n) && aliveNeighbours(grid, m, n) === 3 ? 1 : 0;
+const threeNeighbours = (grid, m, n) =>
+  !isAlive(grid, m, n) && aliveNeighbours(grid, m, n) === 3;
 
-// // nextGeneration :: (Matrix) -> Matrix
-// const nextGeneration = (grid) => grid.map((_, m) => grid[m].map((_, n) => {
-//     // cells on the grid
-//     const cell = [m, n];
-//     // check if a living cell dies or lives or a dead cell that becomes alive on against four rules and if so return new grid
-// }));
+// nextGeneration :: (Matrix) -> Matrix
+const nextGeneration = grid => {
+  const newGrid = grid.map((_, m) =>
+    grid[m].map((_, n) => {
+      if (
+        lessThanTwoNeighbours(grid, m, n) ||
+        moreThanThreeNeighbours(grid, m, n)
+      ) {
+        grid[m][n] = 0;
+      } else if (
+        twoOrThreeNeighbours(grid, m, n) ||
+        threeNeighbours(grid, m, n)
+      ) {
+        grid[m][n] = 1;
+      }
+    })
+  );
+  return newGrid;
+};
 
-export { matrix, isAlive, horizontalPoints, verticalPoints, northWestDiagonalPoints,
-         northEastDiagonalPoints, reproduce, isInside, neighbourhoodPoints, aliveNeighbours,
-         lessThanTwoNeighbours, twoOrThreeNeighbours, moreThanThreeNeighbours, threeNeighbours }
+export {
+  isAlive,
+  horizontalPoints,
+  verticalPoints,
+  northWestDiagonalPoints,
+  northEastDiagonalPoints,
+  isInside,
+  neighbourhoodPoints,
+  neighboursWithin,
+  aliveNeighbours,
+  lessThanTwoNeighbours,
+  twoOrThreeNeighbours,
+  moreThanThreeNeighbours,
+  threeNeighbours,
+  nextGeneration
+};
