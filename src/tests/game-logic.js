@@ -64,22 +64,22 @@ const threeNeighbours = (grid, m, n) =>
 
 // nextGeneration :: (Matrix) -> Matrix
 const nextGeneration = grid => {
-  const newGrid = grid.map((_, m) =>
-    grid[m].map((_, n) => {
+  for (let m = 0; m < grid.length; m += 1) {
+    for (let n = 0; n < grid[m].length; n += 1) {
       if (
         lessThanTwoNeighbours(grid, m, n) ||
         moreThanThreeNeighbours(grid, m, n)
       ) {
         grid[m][n] = 0;
       } else if (
-        twoOrThreeNeighbours(grid, m, n) ||
+        moreThanThreeNeighbours(grid, m, n) ||
         threeNeighbours(grid, m, n)
       ) {
         grid[m][n] = 1;
       }
-    })
-  );
-  return newGrid;
+    }
+  }
+  return grid;
 };
 
 export {
