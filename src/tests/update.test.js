@@ -13,7 +13,7 @@ import {
   moreThanThreeNeighbours,
   threeNeighbours,
   nextGeneration
-} from "./game-logic";
+} from "./update";
 
 import { matrix } from "./model";
 

@@ -1,5 +1,3 @@
-import { range, map, reduce, filter, partial, compose } from "../helpers";
-
 /*  process the entire cells based on the four rules:
     1) Any live cell with fewer than two live neighbours dies, as if caused by underpopulation.
     2) Any live cell with two or three live neighbours lives on to the next generation.
