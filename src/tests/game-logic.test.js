@@ -15,7 +15,7 @@ import {
   nextGeneration
 } from "./game-logic";
 
-import { matrix } from "../model";
+import { matrix } from "./model";
 
 describe("isAlive", () => {
   it("checks status of a cell", () => {
