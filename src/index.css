@@ -14,10 +14,6 @@
     float: left;
 }
 
-.cell:hover {
-    background: #00CCFF;
-}
-
 .alive {
     background-color: #333333;
 }
