@@ -8,22 +8,31 @@ function Cell(props) {
 }
 
 function Grid(props) {
-  const cells = [];
-  for (let m = 0; m < props.grid.length; m += 1) {
-    for (let n = 0; n < props.grid[m].length; n += 1) {
-      const className = props.grid[m][n] ? "cell alive" : "cell";
-      cells.push(
-        <Cell
-          cellClass={className}
-          coordinate={[m, n]}
-          key={[m, n]}
-          row={m}
-          col={n}
-        />
+  return <div className="flex-grid"> {cellsInGrid(props.grid)}</div>;
+  function cellsInGrid(grid) {
+    const matrix = [];
+    for (let m = 0; m < grid.length; m += 1) {
+      const cells = [];
+      for (var n = 0; n < grid[m].length; n += 1) {
+        const className = grid[m][n] ? "cell alive" : "cell";
+        cells.push(
+          <Cell
+            cellClass={className}
+            coordinate={[m, n]}
+            key={[m, n]}
+            row={m}
+            col={n}
+          />
+        );
+      }
+      matrix.push(
+        <div className="row" key={[m, n]}>
+          {cells}
+        </div>
       );
     }
+    return matrix;
   }
-  return <div className="grid"> {cells}</div>;
 }
 
 function Game() {
