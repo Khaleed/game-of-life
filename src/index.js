@@ -30,7 +30,7 @@ function Game() {
   const initialGrid = matrix(3, 3); //=> [[0, 0, 0], [0, 0, 0], [0, 0, 0]]
   return (
     <div className="game-of-life">
-      <h1>Conway's Game of Life</h1>
+      <h1> Game of Life</h1>
       <Grid grid={initialGrid} />
     </div>
   );
