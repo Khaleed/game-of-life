@@ -1,4 +1,5 @@
-.grid {
+.flex-grid {
+    display: flex;
     width: 100px;
     height: 100px;
     margin: auto;
@@ -8,10 +9,8 @@
 .cell {
     width: 10px;
     height: 10px;
-    border: solid 1px #d3d3d3;
+    border: 1px solid #d3d3d3;
     box-sizing: border-box; /* make the border part of the cell */
-    display: inline-block;
-    float: left;
 }
 
 .alive {
@@ -20,13 +19,6 @@
 
 .dead {
     background-color: white;
-}
-
-/* helper to center content */
-.center {
-    margin: auto;
-    display: table;
-    margin-top: 10px;
 }
 
 h1, h2 {
