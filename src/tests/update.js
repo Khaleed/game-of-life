@@ -48,36 +48,37 @@ const aliveNeighbours = (grid, m, n) =>
 const lessThanTwoNeighbours = (grid, m, n) =>
   isAlive(grid, m, n) && aliveNeighbours(grid, m, n) < 2;
 
-// twoOrThreeNeighbours :: (Matrix, Int, Int) -> Int
+// twoOrThreeNeighbours :: (Matrix, Int, Int) -> Bool
 const twoOrThreeNeighbours = (grid, m, n) =>
   isAlive(grid, m, n) && [2, 3].includes(aliveNeighbours(grid, m, n));
 
-// moreThanThreeNeighbours :: (Matrix, Int, Int) -> Int
+// moreThanThreeNeighbours :: (Matrix, Int, Int) -> Bool
 const moreThanThreeNeighbours = (grid, m, n) =>
   isAlive(grid, m, n) && aliveNeighbours(grid, m, n) > 3;
 
-// threeNeighbours :: (Matrix, Int, Int) -> Int
+// threeNeighbours :: (Matrix, Int, Int) -> Bool
 const threeNeighbours = (grid, m, n) =>
   !isAlive(grid, m, n) && aliveNeighbours(grid, m, n) === 3;
 
 // nextGeneration :: (Matrix) -> Matrix
 const nextGeneration = grid => {
-  for (let m = 0; m < grid.length; m += 1) {
-    for (let n = 0; n < grid[m].length; n += 1) {
+  const newGrid = Object.assign([], grid);
+  for (let m = 0; m < newGrid.length; m += 1) {
+    for (let n = 0; n < newGrid[m].length; n += 1) {
       if (
         lessThanTwoNeighbours(grid, m, n) ||
         moreThanThreeNeighbours(grid, m, n)
       ) {
-        grid[m][n] = 0;
+        newGrid[m][n] = 0;
       } else if (
         moreThanThreeNeighbours(grid, m, n) ||
         threeNeighbours(grid, m, n)
       ) {
-        grid[m][n] = 1;
+        newGrid[m][n] = 1;
       }
     }
   }
-  return grid;
+  return newGrid;
 };
 
 export {

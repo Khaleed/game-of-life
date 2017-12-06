@@ -70,7 +70,7 @@ describe("neighbourhoodPoints", () => {
 });
 
 describe("neighboursWithin", () => {
-  it("returns coordinates of all neighbours within a given grid", () => {
+  it("returns coordinates of all neighbours of a provided cell within a given grid", () => {
     const grid = [[0, 0], [0, 0]];
     expect(neighboursWithin(grid, 0, 0)).toEqual([[0, 1], [1, 0], [1, 1]]);
   });
