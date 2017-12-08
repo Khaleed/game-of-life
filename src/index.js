@@ -16,7 +16,7 @@ function Cell(props) {
 function Grid(props) {
   return <div className="flex-grid"> {cellsInGrid(props.grid)}</div>;
 
-  // TODO refactor fn and put it in helpers dir
+  // TODO refactor and take it out of the component
   function cellsInGrid(grid) {
     const matrix = [];
     for (let m = 0; m < grid.length; m += 1) {
@@ -47,8 +47,8 @@ function Grid(props) {
 }
 
 class Game extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       initialGrid: matrix(3, 3) //[[0, 0, 0], [0, 0, 0], [0, 0, 0]]
     };
