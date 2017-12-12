@@ -2,13 +2,24 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import { matrix } from "./tests/model.js";
+import { nextGeneration } from "./tests/update.js";
+
+function Play(props) {
+  return (
+    <div className="play-btn">
+      <button type="button" onClick={() => props.generations()}>
+        Play
+      </button>
+    </div>
+  );
+}
 
 function Cell(props) {
   return (
     <div
       className={props.cellClass}
       coordinate={props.coordinate}
-      onClick={() => props.cellSelection(props.row, props.col)}
+      onClick={() => props.seed(props.row, props.col)}
     />
   );
 }
@@ -32,12 +43,12 @@ function Grid(props) {
             key={id}
             row={m}
             col={n}
-            cellSelection={props.cellSelection}
+            seed={props.seed}
           />
         );
       }
       matrix.push(
-        <div className="row" key={[m, n]}>
+        <div className="row" key={`row-${m}`}>
           {cells}
         </div>
       );
@@ -50,11 +61,11 @@ class Game extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialGrid: matrix(3, 3) //[[0, 0, 0], [0, 0, 0], [0, 0, 0]]
+      initialGrid: matrix(25, 25)
     };
   }
 
-  cellSelection = (m, n) => {
+  seed = (m, n) => {
     const newGrid = [...this.state.initialGrid];
     newGrid[m][n] = !newGrid[m][n];
     this.setState({
@@ -62,14 +73,26 @@ class Game extends React.Component {
     });
   };
 
+  generations = () => {
+    const grid = [...this.state.initialGrid];
+    const newGrid = nextGeneration(grid);
+    this.setState({
+      initialGrid: newGrid
+    });
+    this.tick();
+  };
+
+  tick = () => {
+    const requestAnimationFrame = window.requestAnimationFrame;
+    requestAnimationFrame(this.generations);
+  };
+
   render() {
     return (
-      <div className="game-of-life">
+      <div className="life">
         <h1>Game of Life</h1>
-        <Grid
-          grid={this.state.initialGrid}
-          cellSelection={this.cellSelection}
-        />
+        <Grid grid={this.state.initialGrid} seed={this.seed} />
+        <Play generations={this.generations} />
       </div>
     );
   }
