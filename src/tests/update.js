@@ -60,11 +60,11 @@ const moreThanThreeNeighbours = (grid, m, n) =>
 const threeNeighbours = (grid, m, n) =>
   !isAlive(grid, m, n) && aliveNeighbours(grid, m, n) === 3;
 
-// nextGeneration :: (Matrix) -> Matrix
+// nextGeneration :: Matrix -> Matrix
 const nextGeneration = grid => {
-  const newGrid = Object.assign([], grid);
-  for (let m = 0; m < newGrid.length; m += 1) {
-    for (let n = 0; n < newGrid[m].length; n += 1) {
+  const newGrid = [...grid];
+  for (let m = 0; m < grid.length; m += 1) {
+    for (let n = 0; n < grid[m].length; n += 1) {
       if (
         lessThanTwoNeighbours(grid, m, n) ||
         moreThanThreeNeighbours(grid, m, n)
