@@ -1,4 +1,4 @@
-import { range, map } from "../helpers/helpers";
+import { range, map } from "./helpers/helpers";
 
 // matrix :: ([], Int) -> Matrix
 export const matrix = (m, n) => {

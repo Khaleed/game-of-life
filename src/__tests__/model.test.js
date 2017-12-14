@@ -1,4 +1,4 @@
-import { matrix } from "./model";
+import { matrix } from "../model";
 
 describe("matrix", () => {
   it("is a function that takes number of rows and columns", () => {

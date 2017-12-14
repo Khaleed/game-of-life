@@ -12,15 +12,15 @@ import {
   twoOrThreeNeighbours,
   moreThanThreeNeighbours,
   threeNeighbours,
-  nextGeneration
-} from "./update";
+  nextGridGeneration
+} from "../update";
 
-import { matrix } from "./model";
+import { matrix } from "../model";
 
 describe("isAlive", () => {
   it("checks status of a cell", () => {
     const grid = matrix(3, 3);
-    expect(isAlive(grid, 1, 1)).toBeLessThan(2);
+    expect(isAlive(grid, 1, 1)).toBeFalsy();
   });
 });
 
@@ -114,9 +114,9 @@ describe("threeNeighbours", () => {
   });
 });
 
-describe("nextGeneration", () => {
+describe("nextGridGeneration", () => {
   it("returns a new grid of cells after a tick", () => {
     const grid = [[1, 0, 1], [1, 1, 1], [0, 0, 1]];
-    expect(nextGeneration(grid)).toEqual([[1, 0, 1], [1, 0, 1], [0, 1, 1]]);
+    expect(nextGridGeneration(grid)).toEqual([[1, 0, 1], [1, 0, 1], [0, 1, 1]]);
   });
 });

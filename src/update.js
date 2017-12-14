@@ -5,8 +5,8 @@
     4) Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 */
 
-// isAlive :: (Matrix, Int, Int) -> Int
-const isAlive = (grid, m, n) => (grid[m][n] ? 1 : 0);
+// isAlive :: (Matrix, Int, Int) -> Bool
+const isAlive = (grid, m, n) => (grid[m][n] ? true : false);
 
 // horizontalPoints :: (Int, Int) -> Matrix
 const horizontalPoints = (m, n) => [[m, n - 1], [m, n + 1]];
@@ -60,8 +60,8 @@ const moreThanThreeNeighbours = (grid, m, n) =>
 const threeNeighbours = (grid, m, n) =>
   !isAlive(grid, m, n) && aliveNeighbours(grid, m, n) === 3;
 
-// nextGeneration :: Matrix -> Matrix
-const nextGeneration = grid => {
+// nextGridGeneration :: Matrix -> Matrix
+const nextGridGeneration = grid => {
   const newGrid = [...grid];
   for (let m = 0; m < grid.length; m += 1) {
     for (let n = 0; n < grid[m].length; n += 1) {
@@ -95,5 +95,5 @@ export {
   twoOrThreeNeighbours,
   moreThanThreeNeighbours,
   threeNeighbours,
-  nextGeneration
+  nextGridGeneration
 };
