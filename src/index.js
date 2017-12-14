@@ -57,7 +57,7 @@ function Grid(props) {
   }
 }
 
-class Game extends React.Component {
+class Game extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -74,8 +74,7 @@ class Game extends React.Component {
   };
 
   generations = () => {
-    const grid = [...this.state.initialGrid];
-    const newGrid = nextGeneration(grid);
+    const newGrid = nextGridGeneration([...this.state.initialGrid]);
     this.setState({
       initialGrid: newGrid
     });
@@ -87,6 +86,11 @@ class Game extends React.Component {
     requestAnimationFrame(this.generations);
   };
 
+  /*Returns a tree of React elements at a point in time.
+     On the next update to props or state, it returns a
+     different tree of React elements. React then figures out how
+     to efficiently update the UI using a diffing algorithm based on heuristics.
+   */
   render() {
     return (
       <div className="life">
