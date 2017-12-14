@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import { matrix } from "./tests/model.js";
-import { nextGeneration } from "./tests/update.js";
+import { matrix } from "./model";
+import { nextGridGeneration } from "./update";
 
 function Play(props) {
   return (
@@ -27,7 +27,7 @@ function Cell(props) {
 function Grid(props) {
   return <div className="flex-grid"> {cellsInGrid(props.grid)}</div>;
 
-  // TODO refactor and take it out of the component
+  // TODO refactor
   function cellsInGrid(grid) {
     const matrix = [];
     for (let m = 0; m < grid.length; m += 1) {
@@ -35,7 +35,7 @@ function Grid(props) {
       let n;
       for (n = 0; n < grid[m].length; n += 1) {
         const className = grid[m][n] ? "cell alive" : "cell";
-        const id = `cell-${m}-${n}`;
+        const id = `cell-${m}-${n}`; // key props is a hint at which child elements may be stable across different renders
         cells.push(
           <Cell
             cellClass={className}
