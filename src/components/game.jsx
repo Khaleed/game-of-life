@@ -1,10 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import { Grid } from "./components/grid";
-import { Play } from "./components/play";
-import { matrix } from "./model";
-import { nextGridGeneration } from "./update";
+import "../index.css";
+import { Grid } from "./grid";
+import { Play } from "./play";
+import { matrix } from "../model";
+import { nextGridGeneration } from "../update";
 
 class Game extends React.PureComponent {
   constructor(props) {
@@ -51,4 +50,4 @@ class Game extends React.PureComponent {
   }
 }
 
-ReactDOM.render(<Game />, document.getElementById("root"));
+export default Game;
