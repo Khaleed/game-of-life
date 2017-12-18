@@ -44,7 +44,6 @@ class Game extends React.PureComponent {
     const newGrid = [...this.state.initialGrid];
     return newGrid.map((_, m) =>
       newGrid[m].map((_, n) => {
-        // random number between 1 and 3
         if (randomBetween(1, 3) === 1) {
           newGrid[m][n] = 1;
         } else {
@@ -57,11 +56,11 @@ class Game extends React.PureComponent {
     );
   };
 
-  /*Returns a tree of React elements at a point in time.
+  /*   Returns a tree of React elements at a point in time.
        On the next update to props or state, it returns a
        different tree of React elements. React then figures out how
        to efficiently update the UI using a diffing algorithm based on heuristics.
-     */
+  */
   render() {
     return (
       <div className="life">
