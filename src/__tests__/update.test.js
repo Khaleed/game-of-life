@@ -79,8 +79,8 @@ describe("aliveNeighbours", () => {
     const grid = matrix(3, 3);
     const newGrid = matrix(3, 3);
     newGrid[1][2] = 1; // [[0, 0, 0], [0, 0, 1], [0, 0, 0]]
-    expect(aliveNeighbours(grid, 1, 1)).toEqual(0); // 0
-    expect(aliveNeighbours(newGrid, 1, 1)).toEqual(1); // 1
+    expect(aliveNeighbours(grid, 1, 1)).toEqual(0);
+    expect(aliveNeighbours(newGrid, 1, 1)).toEqual(1);
   });
 });
 
