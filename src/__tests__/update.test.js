@@ -8,10 +8,8 @@ import {
   neighbourhoodPoints,
   neighboursWithin,
   aliveNeighbours,
-  lessThanTwoNeighbours,
-  twoOrThreeNeighbours,
-  moreThanThreeNeighbours,
-  threeNeighbours,
+  nextCellGeneration,
+  nextRowGeneration,
   nextGridGeneration
 } from "../update";
 
@@ -86,37 +84,39 @@ describe("aliveNeighbours", () => {
   });
 });
 
-describe("lessThanTwoNeighbours", () => {
-  it("check if a live cell has less than two live neighbours", () => {
+describe("nextCellGeneration", () => {
+  it("checks that a live cell with two neighbours returns 1", () => {
+    const grid = [[1, 1, 0], [1, 0, 0], [0, 0, 0]];
+    expect(nextCellGeneration(grid, 0, 0)).toEqual(1);
+  });
+  it("checks that a live cell with three live neighbours returns 1", () => {
+    const grid = [[1, 1, 0], [0, 1, 1], [0, 0, 0]];
+    expect(nextCellGeneration(grid, 0, 1)).toEqual(1);
+  });
+  it("checks that a dead cell with three live neighbours returns 1", () => {
+    const grid = [[1, 1, 0], [0, 0, 1], [0, 0, 0]];
+    expect(nextCellGeneration(grid, 1, 1)).toEqual(1);
+  });
+  it("checks that a live cell with less than two live neighbours returns 0", () => {
     const grid = [[1, 0, 0], [0, 1, 0], [0, 0, 0]];
-    expect(lessThanTwoNeighbours(grid, 1, 1)).toBeTruthy();
+    expect(nextCellGeneration(grid, 1, 1)).toEqual(0);
+  });
+  it("checks that a live cell with more than three live neighbours returns 0", () => {
+    const grid = [[1, 1, 0], [0, 1, 1], [0, 1, 1]];
+    expect(nextCellGeneration(grid, 1, 2)).toEqual(0);
   });
 });
 
-describe("twoOrThreeNeighbours", () => {
-  it("check if a live cell has two or three live neighbours", () => {
-    const grid = [[1, 0, 0], [0, 1, 0], [1, 0, 0]];
-    expect(twoOrThreeNeighbours(grid, 1, 1)).toBeTruthy();
-  });
-});
-
-describe("moreThanThreeNeighbours", () => {
-  it("check if a live cell has more than three live neighbours", () => {
-    const grid = [[1, 0, 1], [0, 1, 0], [1, 0, 1]];
-    expect(moreThanThreeNeighbours(grid, 1, 1)).toBeTruthy();
-  });
-});
-
-describe("threeNeighbours", () => {
-  it("check if a dead cell has three live neighbours", () => {
-    const grid = [[1, 0, 1], [0, 0, 0], [1, 0, 0]];
-    expect(threeNeighbours(grid, 1, 1)).toBeTruthy();
+describe("nextRowGeneration", () => {
+  it("returns a new row of cells after a tick", () => {
+    const grid = [[1, 0, 1], [1, 1, 1], [0, 0, 1]];
+    expect(nextRowGeneration(grid, 1)).toEqual([1, 0, 1]);
   });
 });
 
 describe("nextGridGeneration", () => {
   it("returns a new grid of cells after a tick", () => {
     const grid = [[1, 0, 1], [1, 1, 1], [0, 0, 1]];
-    expect(nextGridGeneration(grid)).toEqual([[1, 0, 1], [1, 0, 1], [0, 1, 1]]);
+    expect(nextGridGeneration(grid)).toEqual([[1, 0, 1], [1, 0, 1], [0, 0, 1]]);
   });
 });

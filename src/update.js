@@ -44,42 +44,26 @@ const aliveNeighbours = (grid, m, n) =>
     0
   );
 
-// lessThanTwoNeighbours :: (Matrix, Int, Int) -> Bool
-const lessThanTwoNeighbours = (grid, m, n) =>
-  isAlive(grid, m, n) && aliveNeighbours(grid, m, n) < 2;
+// nextCellGeneration :: (Matrix, Int, Int) -> Int
+function nextCellGeneration(grid, m, n) {
+  const neighbourCount = aliveNeighbours(grid, m, n);
+  const live = isAlive(grid, m, n);
+  return (live && neighbourCount === 2) ||
+    (live && neighbourCount === 3) ||
+    (!live && neighbourCount === 3)
+    ? 1
+    : 0;
+}
 
-// twoOrThreeNeighbours :: (Matrix, Int, Int) -> Bool
-const twoOrThreeNeighbours = (grid, m, n) =>
-  isAlive(grid, m, n) && [2, 3].includes(aliveNeighbours(grid, m, n));
-
-// moreThanThreeNeighbours :: (Matrix, Int, Int) -> Bool
-const moreThanThreeNeighbours = (grid, m, n) =>
-  isAlive(grid, m, n) && aliveNeighbours(grid, m, n) > 3;
-
-// threeNeighbours :: (Matrix, Int, Int) -> Bool
-const threeNeighbours = (grid, m, n) =>
-  !isAlive(grid, m, n) && aliveNeighbours(grid, m, n) === 3;
+// nextRowGeneration :: (Matrix, Int) -> Array
+function nextRowGeneration(grid, m) {
+  return grid[m].map((_, n) => nextCellGeneration(grid, m, n));
+}
 
 // nextGridGeneration :: Matrix -> Matrix
-const nextGridGeneration = grid => {
-  const newGrid = [...grid];
-  for (let m = 0; m < grid.length; m += 1) {
-    for (let n = 0; n < grid[m].length; n += 1) {
-      if (
-        lessThanTwoNeighbours(grid, m, n) ||
-        moreThanThreeNeighbours(grid, m, n)
-      ) {
-        newGrid[m][n] = 0;
-      } else if (
-        moreThanThreeNeighbours(grid, m, n) ||
-        threeNeighbours(grid, m, n)
-      ) {
-        newGrid[m][n] = 1;
-      }
-    }
-  }
-  return newGrid;
-};
+function nextGridGeneration(grid) {
+  return grid.map((_, m) => nextRowGeneration(grid, m));
+}
 
 export {
   isAlive,
@@ -91,9 +75,7 @@ export {
   neighbourhoodPoints,
   neighboursWithin,
   aliveNeighbours,
-  lessThanTwoNeighbours,
-  twoOrThreeNeighbours,
-  moreThanThreeNeighbours,
-  threeNeighbours,
+  nextCellGeneration,
+  nextRowGeneration,
   nextGridGeneration
 };
