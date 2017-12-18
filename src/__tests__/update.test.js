@@ -11,9 +11,9 @@ import {
   nextCellGeneration,
   nextRowGeneration,
   nextGridGeneration
-} from "../update";
+} from "../update/update";
 
-import { matrix } from "../model";
+import { matrix } from "../model/model";
 
 describe("isAlive", () => {
   it("checks status of a cell", () => {

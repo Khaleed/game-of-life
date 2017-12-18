@@ -2,8 +2,8 @@ import React from "react";
 import "../index.css";
 import { Grid } from "./grid";
 import { Play } from "./play";
-import { matrix } from "../model";
-import { nextGridGeneration } from "../update";
+import { matrix } from "../model/model";
+import { nextGridGeneration } from "../update/update";
 
 class Game extends React.PureComponent {
   constructor(props) {
