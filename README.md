@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Khaleed/game-of-life.svg?branch=master)](https://travis-ci.org/Khaleed/game-of-life)
+
 # Game of Life
 
 This is an implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). The goal is to learn the basics of React and practise TDD with a well-defined small game.
