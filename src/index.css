@@ -34,12 +34,17 @@ h1 {
     width: 50%;
 }
 
-.controls {
+.controller {
+    padding: 0;
+    margin: 0;
     display: flex;
-    margin: auto;
-    background: #9d7212;
-    padding: 5px;
     justify-content: center;
+    flex-flow: row wrap;
+    align-content: center;
+}
+
+.btn {
+    padding: 5px;
     border-radius: 5px;
     width: 80px;
 }
