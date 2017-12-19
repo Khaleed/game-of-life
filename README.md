@@ -30,7 +30,7 @@ To run tests of the core of the game using [Jest](https://facebook.github.io/jes
 
 - [x] Complete units tests for the functional core
 - [x] Add React components
-- [x] Add controller to configure initial game state
+- [x] Add controller to configure initial state
 - [ ] Allow user to choose the grid size
 
 ## License
