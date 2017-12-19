@@ -45,7 +45,7 @@ const aliveNeighbours = (grid, m, n) =>
   );
 
 // nextCellGeneration :: (Matrix, Int, Int) -> Int
-function nextCellGeneration(grid, m, n) {
+const nextCellGeneration = (grid, m, n) => {
   const neighbourCount = aliveNeighbours(grid, m, n);
   const alive = isAlive(grid, m, n);
   return (alive && neighbourCount === 2) ||
@@ -53,17 +53,15 @@ function nextCellGeneration(grid, m, n) {
     (!alive && neighbourCount === 3)
     ? 1
     : 0;
-}
+};
 
 // nextRowGeneration :: (Matrix, Int) -> Array
-function nextRowGeneration(grid, m) {
-  return grid[m].map((_, n) => nextCellGeneration(grid, m, n));
-}
+const nextRowGeneration = (grid, m) =>
+  grid[m].map((_, n) => nextCellGeneration(grid, m, n));
 
 // nextGridGeneration :: Matrix -> Matrix
-function nextGridGeneration(grid) {
-  return grid.map((_, m) => nextRowGeneration(grid, m));
-}
+const nextGridGeneration = grid =>
+  grid.map((_, m) => nextRowGeneration(grid, m));
 
 export {
   isAlive,
