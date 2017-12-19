@@ -2,7 +2,7 @@ import React from "react";
 
 function Play(props) {
   return (
-    <div className="controls">
+    <div className="btn">
       <button type="button" onClick={() => props.generations()}>
         Play
       </button>
@@ -12,7 +12,7 @@ function Play(props) {
 
 function Stop(props) {
   return (
-    <div className="controls">
+    <div className="btn">
       <button type="button" onClick={() => props.stop()}>
         Stop
       </button>
@@ -22,7 +22,7 @@ function Stop(props) {
 
 function Clear(props) {
   return (
-    <div className="controls">
+    <div className="btn">
       <button type="button" onClick={() => props.clear()}>
         Clear
       </button>
@@ -32,7 +32,7 @@ function Clear(props) {
 
 function Randomise(props) {
   return (
-    <div className="controls">
+    <div className="btn">
       <button type="button" onClick={() => props.random()}>
         Randomise
       </button>
