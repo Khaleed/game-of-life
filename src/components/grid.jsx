@@ -2,7 +2,7 @@ import React from "react";
 import { Cell } from "./cell";
 
 function Grid(props) {
-  return <div className="flex-grid"> {cellsInGrid(props.grid)}</div>;
+  return <div className="flex-grid">{cellsInGrid(props.grid)}</div>;
 
   // TODO refactor
   function cellsInGrid(grid) {
