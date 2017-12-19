@@ -33,8 +33,8 @@ const neighbourhoodPoints = (m, n) =>
 
 // neighboursWithin :: (Matrix, Int, Int) -> Matrix
 const neighboursWithin = (grid, m, n) =>
-  neighbourhoodPoints(m, n).filter(cellCoordinate =>
-    isInside(grid.length, grid[0].length, cellCoordinate[0], cellCoordinate[1])
+  neighbourhoodPoints(m, n).filter(x =>
+    isInside(grid.length, grid[0].length, x[0], x[1])
   );
 
 // aliveNeighbours :: (Matrix, Int, Int) -> Int
