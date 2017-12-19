@@ -66,10 +66,12 @@ class Game extends React.PureComponent {
       <div className="life">
         <h1>Game of Life</h1>
         <Grid grid={this.state.initialGrid} seed={this.seed} />
-        <Play generations={this.generations} />
-        <Stop stop={this.stop} />
-        <Clear clear={this.clear} />
-        <Randomise random={this.randomise} />
+        <div className="controller">
+          <Play generations={this.generations} />
+          <Stop stop={this.stop} />
+          <Clear clear={this.clear} />
+          <Randomise random={this.randomise} />
+        </div>
       </div>
     );
   }
