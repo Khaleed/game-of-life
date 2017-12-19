@@ -31,7 +31,7 @@ const neighbourhoodPoints = (m, n) =>
     northEastDiagonalPoints(m, n)
   );
 
-// neighboursWithin :: (Int, Int) -> Matrix
+// neighboursWithin :: (Matrix, Int, Int) -> Matrix
 const neighboursWithin = (grid, m, n) =>
   neighbourhoodPoints(m, n).filter(cellCoordinate =>
     isInside(grid.length, grid[0].length, cellCoordinate[0], cellCoordinate[1])
