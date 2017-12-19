@@ -47,10 +47,10 @@ const aliveNeighbours = (grid, m, n) =>
 // nextCellGeneration :: (Matrix, Int, Int) -> Int
 function nextCellGeneration(grid, m, n) {
   const neighbourCount = aliveNeighbours(grid, m, n);
-  const live = isAlive(grid, m, n);
-  return (live && neighbourCount === 2) ||
-    (live && neighbourCount === 3) ||
-    (!live && neighbourCount === 3)
+  const alive = isAlive(grid, m, n);
+  return (alive && neighbourCount === 2) ||
+    (alive && neighbourCount === 3) ||
+    (!alive && neighbourCount === 3)
     ? 1
     : 0;
 }
