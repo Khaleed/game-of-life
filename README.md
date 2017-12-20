@@ -13,7 +13,7 @@ This is an implementation of [Conway's Game of Life](https://en.wikipedia.org/wi
 ## Approach
 
 - The game is broken down into a [functional core](https://www.destroyallsoftware.com/screencasts/catalog/functional-core-imperative-shell) and an imperative shell.
-- The functional core consists of a model and functions that update the model using the [Elm Architecture](https://guide.elm-lang.org/architecture/).
+- The functional core consists of a [model](https://github.com/Khaleed/game-of-life/blob/master/src/model/model.js) and functions that [update](https://github.com/Khaleed/game-of-life/blob/master/src/update/update.js) the model using the [Elm Architecture](https://guide.elm-lang.org/architecture/).
 - Shallowly cloned arrays are used for immutability.
 - To make the UI for the game, there was a deep dive into React documentation and source code - including how React is divided into core, renderers, and the reconciler.
 
