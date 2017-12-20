@@ -9,7 +9,6 @@ This is an implementation of [Conway's Game of Life](https://en.wikipedia.org/wi
 - The game is a zero-player game, meaning that once initial state is determined, no further input is required.
 - To configure initial state, either each cell is clicked to toggle them on and off, or randomise is clicked to start the game with an initial seed.
 - To start or cancel simulation, click play or stop.
-- You'll be able to play the game [here](https://khaleed.github.io/game-of-life) :video_game:
 
 ## Approach
 
