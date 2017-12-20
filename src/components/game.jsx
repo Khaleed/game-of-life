@@ -7,8 +7,8 @@ import { nextGridGeneration } from "../update/update";
 import { randomBetween } from "../helpers/helpers";
 
 class Game extends React.PureComponent {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       initialGrid: matrix(25, 25)
     };
