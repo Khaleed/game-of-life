@@ -10,7 +10,7 @@ class Game extends React.PureComponent {
   constructor() {
     super();
     this.state = {
-      initialGrid: matrix(25, 25)
+      initialGrid: matrix(50, 50)
     };
   }
 
@@ -36,7 +36,7 @@ class Game extends React.PureComponent {
 
   clear = () => {
     this.setState({
-      initialGrid: matrix(25, 25)
+      initialGrid: matrix(50, 50)
     });
   };
 

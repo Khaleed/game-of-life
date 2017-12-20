@@ -13,8 +13,8 @@
 }
 
 .cell {
-    width: 15px;
-    height: 15px;
+    width: 10px;
+    height: 10px;
     border: 1px solid #d3d3d3;
 }
 
@@ -27,7 +27,7 @@
 }
 
 h1 {
-    color: black;
+    color: #c38a22;
     margin: auto;
     margin-top: 10px;
     text-align: center;
@@ -38,13 +38,15 @@ h1 {
     padding: 0;
     margin: 0;
     display: flex;
+    height: 135px;
     justify-content: center;
+    align-items: center;
     flex-flow: row wrap;
-    align-content: center;
 }
 
 .btn {
     padding: 5px;
     border-radius: 5px;
     width: 45px;
+    align-self: flex-end;
 }
