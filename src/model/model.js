@@ -1,6 +1,6 @@
 import { range, map } from "../helpers/helpers";
 
-// matrix :: ([], Int) -> Matrix
+// matrix :: (Int, Int) -> Matrix
 export const matrix = (m, n) => {
   const dead = 0;
   const rows = range(m);
